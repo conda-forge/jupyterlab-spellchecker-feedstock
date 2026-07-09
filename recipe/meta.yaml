@@ -11,7 +11,7 @@ source:
   sha256: 5f1da744eb1e39c9819f61129393101d50cd853fa1dd8e2941c3cf3169fbaaea
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
 
@@ -23,10 +23,10 @@ requirements:
     - hatch-jupyter-builder >=0.5
     - python-build
     - pip
-    - python >=3.8
+    - python {{ python_min }}
   run:
     - jupyterlab ~=4.0
-    - python >=3.8
+    - python >={{ python_min }}
 
 test:
   imports:
@@ -38,6 +38,7 @@ test:
     - cat labextensions | grep "@jupyterlab-contrib/spellchecker.*OK"  # [unix]
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/jupyterlab-contrib/spellchecker
